@@ -1,0 +1,204 @@
+/* Reseteo completo para eliminar bordes y scrollbar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor de la escena */
+#escena-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Fondo que cubre toda la pantalla sin desproporcionarse */
+#fondo-imprenta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Capa lista para futuras animaciones */
+#lottie-personajes,
+#lottie-objetos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/*-----------------------------------------------------------------------*/
+
+/* Ubicación y tamaño de la máquina de imprenta cerca del estante */
+#lottie-imprenta {
+  position: absolute;
+  left: -15%;      /* Ajusta el desplazamiento horizontal según prefieras */
+  bottom: -65%;     /* Apoyado cerca del suelo */
+  width: 95%;      /* Escala proporcional de la imprenta */
+  height: 200%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#lottie-imprenta svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Solo los elementos visibles/reales detectan el ratón */
+#lottie-imprenta svg image,
+#lottie-imprenta svg path,
+#lottie-imprenta svg polygon,
+#lottie-imprenta svg g {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Efecto Hover: Resplandor dorado únicamente al pasar por la imprenta */
+#lottie-imprenta:has(image:hover, path:hover, polygon:hover):not(.animando) svg {
+  filter: drop-shadow(0 0 16px rgba(255, 220, 110, 0.95)) brightness(1.1);
+}
+
+/* Desactivar hover y puntero mientras la máquina se mueve */
+#lottie-imprenta.animando,
+#lottie-imprenta.animando svg image,
+#lottie-imprenta.animando svg path,
+#lottie-imprenta.animando svg polygon {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+ 
+/*---------------------------------------------------------------------- */
+
+
+/* 2. Personajes Interactivos (Gutenberg y León en el Centro) */
+#lottie-personajes {
+  position: absolute;
+  top: 30%;
+  left: 14%;
+  width: 80%;
+  height: 80%;
+  z-index: 2; /* Quedan sobre el fondo e imprenta */
+  pointer-events: none;
+}
+
+#lottie-personajes svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Detección precisa de puntero en imágenes y vectores de los personajes */
+#lottie-personajes svg image,
+#lottie-personajes svg path,
+#lottie-personajes svg polygon,
+#lottie-personajes svg circle {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Hover: Brillo dorado solo al pasar por los personajes */
+#lottie-personajes:has(image:hover, path:hover, polygon:hover, circle:hover):not(.animando) svg {
+  filter: drop-shadow(0 0 16px rgba(255, 220, 110, 0.95)) brightness(1.1);
+}
+
+/* Desactivar hover y puntero mientras los personajes se animan */
+#lottie-personajes.animando,
+#lottie-personajes.animando svg image,
+#lottie-personajes.animando svg path,
+#lottie-personajes.animando svg polygon,
+#lottie-personajes.animando svg circle {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/*---------------------------------------------------------------------- */
+
+/* Luz suave entrando por la ventana centrada */
+.luz-ventana {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradiente centrado justo sobre la ventana del fondo */
+  background: radial-gradient(
+    circle at 62% 42%, 
+    rgb(255, 249, 143) 0%, 
+    rgba(254, 190, 41, 0.2) 18%, 
+    transparent 42%
+  );
+  mix-blend-mode: screen; /* Fusiona la luz con los detalles del fondo */
+  pointer-events: none;
+  z-index: 1; /* Queda sobre el fondo pero detrás de los personajes e imprenta */
+  animation: pulso-luz-ventana 4s infinite alternate ease-in-out;
+}
+
+/* Sutil variación en la intensidad de la luz exterior */
+@keyframes pulso-luz-ventana {
+  0% {
+    opacity: 0.85;
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1.15);
+  }
+}
+
+/*---------------------------------------------------------------------- */
+
+/* Contenedor de la Sirvienta */
+#lottie-sirvienta {
+  position: absolute;
+  right: 13%;
+  bottom: -2%;
+  width: 250px;
+  height: 350px;
+  z-index: 5;
+  pointer-events: none; /* Evita bloqueos generales */
+}
+
+#lottie-sirvienta svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Permitir interacción y hover únicamente en los trazos/imágenes del personaje */
+#lottie-sirvienta svg image,
+#lottie-sirvienta svg path,
+#lottie-sirvienta svg polygon,
+#lottie-sirvienta svg circle {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Efecto Hover: Brillo dorado al pasar el ratón */
+#lottie-sirvienta:has(image:hover, path:hover, polygon:hover, circle:hover):not(.animando) svg {
+  filter: drop-shadow(0 0 16px rgba(255, 220, 110, 0.95)) brightness(1.1);
+}
