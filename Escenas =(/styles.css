@@ -1,0 +1,207 @@
+/* 1. Elimina márgenes y rellenos por defecto del navegador */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Elimina las barras de desplazamiento */
+    background-color: #000;
+}
+
+/* 2. Reseteo global para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 3. Contenedor principal de la escena */
+#scene-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 4. Imagen ajustada sin espacios */
+#bg-castle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block; /* Elimina espacios residuales de elementos inline */
+}
+
+/*--------------------------------------------------------------------------
+
+/* Asegurar que la capa de antorchas esté por encima del fondo */
+#torches-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Z-index alto para quedar al frente */
+    pointer-events: none;
+}
+
+/* Dimensiones y posición de cada contenedor de llama */
+.torch-flame {
+    position: absolute;
+    width: 270px;  /* Le damos un ancho y alto fijo inicial para probar */
+    height: 340px;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+}
+
+/* Posición sobre los soportes de las 3 antorchas */
+#torch-left {
+    top: 30.6%;
+    left: 23%;
+}
+
+#torch-center {
+    top: 30%;
+    left: 49%;
+}
+
+#torch-right {
+    top: 28.6%;
+    left: 74.6%;
+}
+
+/* Asegurar que el SVG generado por Lottie tome todo el tamaño del contenedor */
+.torch-flame svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*-------------------------------------------------------------------------*/
+
+body {
+  background-color: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Contenedor principal donde se ubican los personajes */
+#escena-container {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+/* Capa de los personajes con cursor e iluminación al pasar el mouse */
+#lottie-personajes {
+  width: 100%;
+  height: 100%;
+  cursor: pointer; /* Muestra el puntero de la mano */
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+}
+
+/* EFECTO HOVER: Brillo dorado y leve escala al pasar el cursor */
+#lottie-personajes:hover {
+  filter: drop-shadow(0 0 14px rgba(255, 223, 100, 0.8)) brightness(1.1);
+  transform: scale(1.01);
+}
+
+
+/* Cuando la animación está en marcha, se desactivan el cursor y el brillo */
+#lottie-personajes.animando,
+#lottie-personajes.animando svg image,
+#lottie-personajes.animando svg path,
+#lottie-personajes.animando svg polygon,
+#lottie-personajes.animando svg circle {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/*---------------------------------------------------------------------------
+
+/* Capa para oscurecer el fondo del pasillo */
+.sombra-ambiente {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Oscurece el pasillo y crea una viñeta en los bordes */
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(0, 0, 0, 0.2) 0%, 
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none; /* No interfiere con clics */
+  z-index: 1;
+}
+
+
+/* Resplandor cálido concentrado en las 3 antorchas */
+.luz-antorchas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Tres focos de luz pequeña justo sobre el fuego de cada antorcha */
+  background: 
+    /* Antorcha 1 (Izquierda) */
+    radial-gradient(circle at 23% 25%, rgba(255, 150, 20, 0.7) 0%, rgba(255, 100, 0, 0.2) 6%, transparent 14%),
+    /* Antorcha 2 (Centro) */
+    radial-gradient(circle at 49% 25%, rgba(255, 150, 20, 0.7) 0%, rgba(255, 100, 0, 0.2) 6%, transparent 14%),
+    /* Antorcha 3 (Derecha) */
+    radial-gradient(circle at 74% 23%, rgba(255, 150, 20, 0.7) 0%, rgba(255, 100, 0, 0.2) 6%, transparent 14%);
+  mix-blend-mode: screen; /* Mantiene la luz suave e integrada con el fondo */
+  pointer-events: none;
+  z-index: 2;
+  animation: parpadeo-fuego 2s infinite alternate ease-in-out;
+}
+
+/* Animación de parpadeo leve */
+@keyframes parpadeo-fuego {
+  0% {
+    opacity: 0.85;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.25);
+  }
+  100% {
+    opacity: 0.9;
+    filter: brightness(1.1);
+  }
+}
+
+/* Ajusta los z-index de las capas Lottie para que coincidan */
+#lottie-pasillo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#lottie-personajes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3; /* Queda por encima del ambiente para recibir la luz */
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasillo del Castillo</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Carga de la librería Lottie requerida -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</head>
+
+<body>
+
+    <main id="scene-container">
+        <!-- Capa de Fondo / Escenario -->
+        <div id="background-layer" class="layer">
+            <img src="pasillo-real/imageness/pasillo real.jpg" id="bg-castle" alt="Pasillo del Castillo">
+        </div>
+
+        <!-- Capa de Animaciones Lottie (Antorchas) -->
+        <div id="torches-layer" class="layer">
+            <div id="torch-left" class="torch-flame"></div>
+            <div id="torch-center" class="torch-flame"></div>
+            <div id="torch-right" class="torch-flame"></div>
+        </div>
+
+        <div id="escena-container">
+  <!-- 1. Animación del Fondo del Pasillo -->
+  <div id="lottie-pasillo"></div>
+
+  <!-- 2. Capa para oscurecer el fondo -->
+  <div class="sombra-ambiente"></div>
+
+  <!-- 3. Luz cálida/resplandor para las antorchas -->
+  <div class="luz-antorchas"></div>
+
+  <!-- 4. Animación de los Personajes -->
+  <div id="lottie-personajes"></div>
+</div>
+
+        <div id="escena-container">
+    <div id="lottie-personajes"></div>
+  </div>
+  
+        <!-- Capa de Canvas e Interfaz -->
+        <canvas id="scene-canvas"></canvas>
+        <div id="ui-layer"></div>  
+    </main>
+
+    <script src="js/scene.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
