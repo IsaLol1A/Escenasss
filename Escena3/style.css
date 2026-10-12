@@ -1,0 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#escena-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#fondo-guerra {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  /* Oscurece la imagen base y ajusta contraste para darle un tono más sombrío */
+  filter: brightness(0.6) contrast(1.25) saturate(0.85);
+}
+
+/* Capa general de oscuridad nocturna */
+.capa-oscuridad {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 12, 18, 0.45); /* Tinte azulado/oscuro de noche de guerra */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Resplandor de la ciudad en llamas al fondo */
+.resplandor-fuego {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 65% 35%, rgb(255, 214, 65) 0%, rgba(255, 153, 28, 0.434) 30%, transparent 70%);
+  mix-blend-mode: color-burn; /* Mezcla el color de fuego de manera orgánica con el fondo */
+  z-index: 2;
+  pointer-events: none;
+  animation: parpadeoFuego 4s ease-in-out infinite alternate;
+}
+
+/* Animación sutil de parpadeo para simular el fuego ardiendo */
+@keyframes parpadeoFuego {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1.2;
+  }
+}
+
+/*---------------------------------------------------------------------- */
+
+/* Contenedor de Amog (Esquina inferior izquierda) */
+#lottie-amog {
+  position: absolute;
+  left: -15%;
+  bottom: -50%;
+  width: 1000px;
+  height: 980px;
+  z-index: 5;
+  pointer-events: none; /* Permite que el ratón pase a través de zonas vacías */
+  
+  /* Animación de movimiento leve y constante */
+  animation: flotarPersonaje 3.5s ease-in-out infinite alternate;
+}
+
+#lottie-amog svg {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: filter 0.25s ease;
+}
+
+/* Habilitar interactividad únicamente en los elementos gráficos internos */
+#lottie-amog svg image,
+#lottie-amog svg path,
+#lottie-amog svg polygon,
+#lottie-amog svg circle {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Efecto Hover: Brillo dorado al pasar el ratón (solo si no está animando) */
+#lottie-amog:has(image:hover, path:hover, polygon:hover, circle:hover):not(.animando) svg {
+  filter: drop-shadow(0 0 16px rgba(255, 179, 38, 0.95)) brightness(1.1);
+}
+
+/* Animación de flotación sutil para los personajes */
+@keyframes flotarPersonaje {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-8px); /* Se desplaza suavemente hacia arriba unos píxeles */
+  }
+}
+
+/*---------------------------------------------------------------------- */
+
+/* Estilo y posición del Castillo (Superior Derecha) */
+#castillo-guerra {
+  position: absolute;
+  top: 3%;         /* Ubicado hacia arriba en la imagen */
+  right: 20%;       /* Ubicado hacia el lado derecho, integrándose con las montañas */
+  width: 440px;     /* Tamaño proporcional al fondo */
+  height: auto;
+  z-index: 2;       /* Detrás de los efectos frontales pero sobre el fondo */
+  pointer-events: none;
+  
+  /* Filtro sombrío pero controlado (no tan oscuro para que resalte) */
+  filter: brightness(0.75) contrast(1.1) hue-rotate(-10deg);
+  opacity: 0.9;     /* Integración sutil con la atmósfera de niebla/humo */
+}
+
+/*---------------------------------------------------------------------- */
+
+/* Clases de tamaños de fuego para cambiarlos super fácil */
+.fuego-pequeno  { width: 250px; height: 250px; }
+.fuego-mediano  { width: 400px; height: 400px; }
+.fuego-grande   { width: 550px; height: 550px; }
+.fuego-gigante  { width: 680px; height: 680px; }
+
+/* Propiedades base de los contenedores de llamas */
+.contenedor-llamas {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.contenedor-llamas svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   POSICIONES DE LAS 6 LLAMAS
+   ========================================================= */
+
+/* --- GRUPO 1: Alrededor del Castillo (Tomando tus medidas) --- */
+/* Castillo base: right: 20%, top: 3%, width: 440px */
+#lottie-llamas-1 {
+  top: 15%;
+  right: 32%; /* Izquierda del castillo */
+}
+
+#lottie-llamas-2 {
+  top: -28%;
+  right: 13%; /* Centro/puerta principal del castillo (más grande) */
+}
+
+#lottie-llamas-3 {
+  top: 32%;
+  right: 8%;  /* Derecha del castillo */
+}
+
+
+/* --- GRUPO 2: Esparcidas por otros lados de la escena --- */
+#lottie-llamas-4 {
+  top: 29%;
+  left: 20%;  /* Fuego en medio del campo de batalla (izquierda-centro) */
+}
+
+#lottie-llamas-5 {
+  bottom: -40%;
+  right: -16%; 
+   width: 680px; height: 680px;/* Gran incendio en la esquina inferior derecha */
+}
+
+#lottie-llamas-6 {
+  top: 40%;
+  left: 35%; 
+  width: 550px; height: 550px;
+    /* Fuego menor en la zona lateral izquierda */
+}
+/*---------------------------------------------------------------------- */
+
+/* Canvas de Partículas de Ceniza */
+#canvas-cenizas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4; /* Flotan por encima del castillo y llamas, pero detrás de la interfaz */
+  pointer-events: none; /* Permite hacer clic en los elementos que estén debajo */
+}
+
+/*-----------------------------------------------------------------------*/

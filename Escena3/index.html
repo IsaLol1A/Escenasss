@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escena 3 - Zona de Guerra</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Librería Lottie Web por si agregaremos animaciones aquí -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+</head>
+
+
+<body>
+
+  <!-- Contenedor principal de la nueva escena -->
+  <div id="escena-container">
+    <!-- Fondo de Guerra -->
+    <img src="Guerra/Imagenexx/Fondo - Guerra.jpg" id="fondo-guerra" alt="Zona de Guerra">
+
+    <!-- Castillo ubicado en la zona superior derecha -->
+    <img src="Guerra/Imagenexx/Castillo.png" id="castillo-guerra" alt="Castillo en la Guerra">
+
+
+<!-- Capa para oscurecer el ambiente nocturno -->
+    <div class="capa-oscuridad"></div>
+
+    <!-- Capa de resplandor de fuego (simulando la ciudad quemándose a lo lejos) -->
+    <div class="resplandor-fuego"></div>
+
+    <div class="resplandor-fuego"></div>
+
+    <!-- Canvas para Partículas de Cenizas (NUEVO) -->
+    <canvas id="canvas-cenizas"></canvas>
+
+    <!-- Ejemplo de un nuevo fuego en otra ubicación -->
+<div id="lottie-llamas-4" class="contenedor-llamas fuego-mediano"></div>
+
+   <!-- ==================== LAS 6 LLAMAS LOTTIE ==================== -->
+    <!-- Llamas 1, 2 y 3: Alrededor del Castillo -->
+    <div id="lottie-llamas-1" class="contenedor-llamas fuego-grande"></div>
+    <div id="lottie-llamas-2" class="contenedor-llamas fuego-gigante"></div>
+    <div id="lottie-llamas-3" class="contenedor-llamas fuego-mediano"></div>
+
+    <!-- Llamas 4, 5 y 6: Esparcidas por otros lados de la escena -->
+    <div id="lottie-llamas-4" class="contenedor-llamas fuego-mediano"></div>
+    <div id="lottie-llamas-5" class="contenedor-llamas fuego-grande"></div>
+    <div id="lottie-llamas-6" class="contenedor-llamas fuego-pequeno"></div>
+    <!-- ============================================================ -->
+
+
+    <!-- Aquí irán los futuros contenedores Lottie de esta escena -->
+<!-- Contenedor para la animación amog.json -->
+    <div id="lottie-amog"></div>
+
+
+
+  </div>
+
+  <script src="js/scene.js"></script>
+</body>
+</html>
