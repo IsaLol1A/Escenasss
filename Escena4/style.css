@@ -1,0 +1,148 @@
+/* Importar la tipografía Caesar Dressing desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  font-family: 'Caesar Dressing', cursive, sans-serif; /* Fuente principal aplicada al juego */
+  cursor: crosshair;
+}
+
+#juego-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#fondo-batalla {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* HUD / Vidas y Puntuación ubicados en la parte inferior izquierda */
+#panel-hud {
+  position: absolute;
+  bottom: 25px;   /* Cambiado de top a bottom para que baje */
+  left: 35px;
+  z-index: 10;
+  color: #f4e8c1; /* Tono pergamino / dorado antiguo */
+  font-size: 32px;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+  display: flex;
+  gap: 40px;
+}
+
+/* Espada del jugador fija abajo a la derecha */
+#espada-jugador {
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  width: 320px;
+  height: auto;
+  z-index: 99;
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: transform 0.08s ease-in-out;
+}
+
+.atacando {
+  transform: rotate(-30deg) translate(-30px, -20px) scale(1.05);
+}
+
+/* Enemigo individual */
+.enemigo {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  z-index: 5;
+  cursor: pointer;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.6));
+  animation: acercarseEnemigo 2.5s linear forwards;
+}
+
+@keyframes acercarseEnemigo {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 1;
+  }
+}
+
+/* Pantallas de fin de juego */
+.oculto {
+  display: none !important;
+}
+
+#pantalla-fin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+#titulo-fin {
+  font-size: 80px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 25px rgba(255, 204, 0, 0.7), 4px 4px 10px rgba(0,0,0,0.9);
+}
+
+/* Estilo general para los botones de fin de juego */
+.btn-fin {
+  padding: 14px 35px;
+  font-family: 'Caesar Dressing', cursive, sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #f4e8c1;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  transition: background 0.2s, transform 0.1s;
+}
+
+/* Botón de Reintentar (Rojo sangre) */
+#btn-reiniciar {
+  background-color: #8b0000;
+}
+#btn-reiniciar:hover {
+  background-color: #a52a2a;
+  transform: scale(1.05);
+}
+
+/* Botón de Siguiente (Verde victorioso) */
+#btn-siguiente {
+  background-color: #2e7d32;
+}
+#btn-siguiente:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
