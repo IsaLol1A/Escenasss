@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minijuego - Combate en el Campo de Batalla</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Contenedor principal del minijuego en pantalla completa -->
+  <div id="juego-container">
+    <!-- Fondo del campo de batalla -->
+    <img src="Pelea/Imagenez/Fondo -- Campo de batalla.png" id="fondo-batalla" alt="Campo de batalla">
+
+   
+    <!-- Panel superior: Vidas y Marcador -->
+    <div id="panel-hud">
+      <div id="vidas">Vidas: ❤️❤️❤️</div>
+      <div id="marcador">Derrotados: 0 / 5</div>
+    </div>
+
+    <!-- Contenedor donde aparecerán los enemigos dinámicamente -->
+    <div id="area-enemigos"></div>
+
+    <!-- Espada en primera persona (Mouse) -->
+    <img src="Pelea/Imagenez/Espada.png" id="espada-jugador" alt="Espada"[cite: 3]>
+
+    <!-- Pantalla de Victoria / Derrota (Ocultas al inicio) -->
+    <div id="pantalla-fin" class="oculto">
+      <h1 id="titulo-fin">¡GANASTE!</h1>
+      
+      <!-- Botón exclusivo para cuando ganas -->
+      <button id="btn-siguiente" class="btn-fin oculto">Siguiente Escena</button>
+      
+      <!-- Botón exclusivo para cuando pierdes -->
+      <button id="btn-reiniciar" class="btn-fin oculto">Reintentar</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de Inicio / Bienvenida al minijuego -->
+    <div id="pantalla-inicio">
+      <h1 class="titulo-inicio">¡A BATALLA!</h1>
+      <button id="btn-iniciar-juego" class="btn-fin">Pelea</button>
+    </div>
+
+  </div>
+
+  <script src="js/scene.js"></script>
+</body>
+</html>
